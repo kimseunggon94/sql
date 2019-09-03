@@ -33,6 +33,7 @@ select concat('---', ltrim('          hello           '),'---') as 'LTRIM',
 
 
 
+       
 
 
 

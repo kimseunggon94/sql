@@ -16,7 +16,6 @@ select ( select count(*) from employees where gender = 'f')as '여직원' ,	(sel
 -- 현재 근무하고 있는 직원 수는 몇 명입니까? (salaries 테이블을 사용합니다.) 
 select count(*) from salaries where to_date >now(); 
 
-
 -- 문제5
 -- 부서는 총 몇 개가 있나요?
 select count(*) from departments;
