@@ -55,7 +55,7 @@ where a.emp_no = b.emp_no
 and a.to_date = '9999-01-01'
 and b.to_date = '9999-01-01'
 group by a.title
-having count(*)>100;
+having count(*)>=100;
 
 -- ex6) 현재 부서별로 현재 직책이 Engineer인 직원들에 대해서만 평균급여를 구하세요.
 select title, avg(salary)
