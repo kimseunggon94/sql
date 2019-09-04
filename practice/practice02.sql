@@ -15,17 +15,15 @@ from employees;
 select DATE_FORMAT(min(hire_date),'%Y년 %m월 %d일') as '신입사원 고용일'
 from employees;
 
-
-select DATE_FORMAT(now(), '%Y');
-
-
-select *
-from employees a, titles b, salaries c
-where a.emp_no = b.emp_no
-and a.emp_no = c.emp_no;
-
-
-
+-- select max(f.a)
+-- from(
+-- select a.emp_no, a.hire_date, '하이',  if(greatest(b.to_date, c.to_date, d.to_date)='9999-01-01', date_format(now(), '%Y')-date_format(hire_date, '%Y'), date_format(greatest(b.to_date, c.to_date, d.to_date), '%Y')-date_format(hire_date, '%Y'))as a 
+-- from employees a, titles b, salaries c, dept_emp d
+-- where a.emp_no = b.emp_no
+-- and a.emp_no = c.emp_no
+-- and a.emp_no = d.emp_no
+-- group by a.emp_no
+-- )as f;
 
 -- 문제4
 -- 현재 이 회사의 평균 연봉은 얼마입니까?
