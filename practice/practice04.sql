@@ -100,7 +100,7 @@ order by salary desc;
 
 -- 문제6
 -- 평균 연봉이 가장 높은 부서는? 
-select dept_name
+select dept_name as 부서
 from departments a
 where a.dept_no =(
 select b.dept_no
@@ -114,7 +114,7 @@ limit 0,1
 
 -- 문제7
 -- 평균 연봉이 가장 높은 직책?
-select title
+select title as 직책
 from employees a, titles b, salaries c
 where a.emp_no = b.emp_no
 and a.emp_no = c.emp_no
