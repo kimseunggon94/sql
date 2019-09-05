@@ -1,4 +1,4 @@
--- practice02
+-- practice04
 
 -- 문제1
 -- 현재 평균 연봉보다 많은 월급을 받는 직원은 몇 명이나 있습니까?
@@ -35,8 +35,8 @@ order by salary desc;
 
 -- 문제3
 -- 현재, 자신의 부서 평균 급여보다 연봉(salary)이 많은 사원의 사번, 이름과 연봉을 조회하세요 
-select a.emp_no as 사번, concat(a.first_name , ' ' , a.last_name) as 이름, c.dept_name as 부서, d.salary as 연봉
-from employees a, dept_emp b, departments c, salaries d, (
+select a.emp_no as 사번, concat(a.first_name , ' ' , a.last_name) as 이름, d.salary as 연봉
+from employees a, dept_emp b, salaries d, (
 select b.dept_no as 부서번호, avg(salary) as 평균급여
 from employees a, dept_emp b, salaries d
 where a.emp_no = b.emp_no
@@ -46,7 +46,6 @@ and d.to_date ='9999-01-01'
 group by b.dept_no
 )as e
 where a.emp_no = b.emp_no
-and b.dept_no = c.dept_no
 and a.emp_no = d.emp_no
 and e.부서번호 = b.dept_no
 and b.to_date ='9999-01-01'
@@ -55,7 +54,7 @@ and d.salary > e.평균급여;
 
 -- 문제4
 -- 현재, 사원들의 사번, 이름, 매니저 이름, 부서 이름으로 출력해 보세요.
-select count(*)
+select a.emp_no as 사번,  concat(a.first_name , ' ' , a.last_name) as 이름, d.매니저이름 , c.dept_name as 부서
 from employees a, dept_emp b, departments c, (
 
 select concat(a.first_name , ' ' , a.last_name) as 매니저이름, d.dept_no as 부서
