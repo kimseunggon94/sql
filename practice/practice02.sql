@@ -15,15 +15,30 @@ from employees;
 select DATE_FORMAT(min(hire_date),'%Y년 %m월 %d일') as '신입사원 고용일'
 from employees;
 
--- select max(f.a)
--- from(
--- select a.emp_no, a.hire_date, '하이',  if(greatest(b.to_date, c.to_date, d.to_date)='9999-01-01', date_format(now(), '%Y')-date_format(hire_date, '%Y'), date_format(greatest(b.to_date, c.to_date, d.to_date), '%Y')-date_format(hire_date, '%Y'))as a 
--- from employees a, titles b, salaries c, dept_emp d
--- where a.emp_no = b.emp_no
--- and a.emp_no = c.emp_no
--- and a.emp_no = d.emp_no
--- group by a.emp_no
--- )as f;
+select f.사원번호, f.입사일, f.근속일
+from(
+select a.emp_no as '사원번호', a.hire_date as '입사일',   
+max(if(d.to_date='9999-01-01', to_days(now())-to_days(hire_date), to_days(d.to_date)-to_days(hire_date)))as '근속일' 
+from employees a, titles b, salaries c, dept_emp d
+where a.emp_no = b.emp_no
+and a.emp_no = c.emp_no
+and a.emp_no = d.emp_no
+group by a.emp_no
+)as f
+where f.근속일 in(
+
+select min(abc.근속일)
+from (
+select a.emp_no as '사원번호', a.hire_date as '입사일',   
+max(if(greatest(b.to_date, c.to_date, d.to_date)='9999-01-01', to_days(now())-to_days(hire_date), to_days(greatest(b.to_date, c.to_date, d.to_date))-to_days(hire_date)))as '근속일' 
+from employees a, titles b, salaries c, dept_emp d
+where a.emp_no = b.emp_no
+and a.emp_no = c.emp_no
+and a.emp_no = d.emp_no
+group by a.emp_no
+)as abc
+
+);
 
 -- 문제4
 -- 현재 이 회사의 평균 연봉은 얼마입니까?
